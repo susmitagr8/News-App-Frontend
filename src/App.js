@@ -1,25 +1,43 @@
-import React, { Component } from 'react';
+import React, {
+  Component
+} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  e = "Not healthy"
+  
+  componentDidMount() {
+    this.healthCheck();
+  }
+  componentWillMount(){
+    this.state = {data: "Not healthy"}
+  }
+  
+  healthCheck() {
+    let options = {
+      mode :'cors',
+      method: 'GET',
+      cache: 'no-cache',
+      headers:{
+        'content-type': 'application/json',
+        'Accept': 'application/json'
+      }
+  };
+   fetch('http://localhost:8081/healthcheck',options).then(response => response.json())
+    .then(data => {
+      console.log(data)
+      this.setState({data: "Healthy"})
+      return data
+    }).catch(error=> this.setState({data: "Not Healthy"}));
+  }
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+    return ( 
+      <div className = "App" >
+      Hello 
+      <div>
+      {this.state.data}
+      </div>
       </div>
     );
   }
