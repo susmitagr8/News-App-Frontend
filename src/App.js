@@ -9,6 +9,7 @@ class App extends Component {
   
   componentDidMount() {
     this.healthCheck();
+    
   }
   componentWillMount(){
     this.state = {data: "Not healthy"}
