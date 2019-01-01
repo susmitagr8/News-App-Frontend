@@ -2,14 +2,14 @@ import React, {
   Component
 } from 'react';
 import './App.css';
-import Buttons from './shared-components/Buttons/Buttons.js'
-import TextField from './shared-components/TextField/TextField.js'
+import {BrowserRouter as Router} from 'react-router-dom'
+import {Route,Switch} from 'react-router-dom'
+import loginSuccess from './components/loginSuccess/loginSuccess'
+import registerSuccess from './components/registerSuccess/registerSuccess'
+import HomePage from './components/HomePage'
 class App extends Component {
   e = "Not healthy"
-  state={
-    Login : false,
-    Register : false
-  }
+  
   componentDidMount() {
     this.healthCheck();
   }
@@ -34,51 +34,17 @@ class App extends Component {
       return data
     }).catch(error=> this.setState({data: "Not Healthy"}));
   }
-  RegisterClick=()=>{   
-  const register=true
-  const login=false
-  this.setState({Register:register})
-  this.setState({Login:login})
-}
-LoginClick=()=>{
-  const register=false
-  const login = true
-  this.setState({Register:register})
-  this.setState({Login:login})
-}
-  render() {
-    let decision=null
 
-    if(this.state.Login)
-    {
-        decision=<div>
-          <TextField data="User ID"/> 
-          <TextField data="Password"/>
-          <p></p>
-          <button class="btn-success btn-lg">Submit</button>
-        </div>
-    }
-    else if(this.state.Register)
-    {
-      decision=<div>
-        <TextField data = "Name"/>
-        <TextField data = "Email ID"/>
-        <TextField data = "Preferred User ID"/>
-        <TextField data = "Password"/>
-        <TextField data = "Confirm Password"/>
-        <p></p>
-        <button class="btn-success btn-lg">Submit</button>
-      </div>
-    }
+  render() {
     return ( 
       <div className = "App" >
-      <div class= "jumbotron">
-        <h1>The News App</h1>
-        <p><large>This is a news Portal</large></p>
-      </div>
-        <Buttons data = "Login" clicked={this.LoginClick}></Buttons>
-        <Buttons data = "Register" clicked={this.RegisterClick}></Buttons>
-        {decision}
+      <Router>
+      <Switch>
+      <Route path="/LoginSuccessful" component={loginSuccess}/>
+      <Route path="/RegisterSuccessful" component={registerSuccess}/>
+      <Route path="/" component={HomePage}/>
+      </Switch>
+      </Router>
       </div>
     );
   }
