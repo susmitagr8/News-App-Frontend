@@ -3,10 +3,14 @@ import  React, {
   } from 'react'
 import Buttons from '../shared-components/Buttons/Buttons'
 import TextField from '../shared-components/TextField/TextField'
-class HomePage extends Component{
+import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
+class HomePage extends React.Component{
     state={
         Login : false,
-        Register : false
+        Register : false,
+        gotoReg : false,
+        gotolog : false
       }
     RegisterClick=()=>{   
         const register=true
@@ -20,14 +24,25 @@ class HomePage extends Component{
         this.setState({Register:register})
         this.setState({Login:login})
       }
+      RegisterSubmit=()=>{
+        this.props.
+          this.state.gotoReg=true;
+          this.state.gotolog=false;
+      }
+      LoginSubmit=()=>{
+        this.state.gotoReg=false;
+        this.state.gotolog=true;
+      }
       render() {
+
         let decision=null
+        
         if(this.state.Login)
         {
             decision=<div>
               <TextField data="User ID"/> 
               <TextField data="Password"/>
-              <button class="btn-success btn-lg">Submit</button>
+              <button class="btn-success btn-lg" onClick = {this.LoginSubmit}>Submit</button>
               </div>
           }
           else if(this.state.Register)
@@ -38,21 +53,23 @@ class HomePage extends Component{
               <TextField data = "Preferred User ID"/>
               <TextField data = "Password"/>
               <TextField data = "Confirm Password"/>
-              <button class="btn-success btn-lg">Submit</button>
+              <button class="btn-success btn-lg" onClick={this.RegisterSubmit}>Submit</button>
+
             </div>
           }
+          if(this.state.gotoReg)
+              return <Redirect to = '/RegisterSuccessful'/>
           return (
             <div>
             <div class= "jumbotron">
-            <h1>The News App</h1>
-            <p>This is a news Portal</p>
+            <h1 class="display-2"><kbd>The News App</kbd></h1>
+            <p class="display-4">Portal for News</p>
           </div>
             <Buttons data = "Login" clicked={this.LoginClick}></Buttons>
             <Buttons data = "Register" clicked={this.RegisterClick}></Buttons>
             {decision}
           </div>
           );
-
         }
        
 }

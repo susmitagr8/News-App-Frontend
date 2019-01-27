@@ -7,6 +7,8 @@ import {Route,Switch} from 'react-router-dom'
 import loginSuccess from './components/loginSuccess/loginSuccess'
 import registerSuccess from './components/registerSuccess/registerSuccess'
 import HomePage from './components/HomePage'
+import TopNav from './shared-components/TopNav'
+import leftNav from './shared-components/leftNav'
 class App extends Component {
   e = "Not healthy"
   
@@ -42,9 +44,12 @@ class App extends Component {
       <Switch>
       <Route path="/LoginSuccessful" component={loginSuccess}/>
       <Route path="/RegisterSuccessful" component={registerSuccess}/>
+      <Route path="/Top" component={TopNav}/>
+      <Route path="/Left" component={leftNav}/>
       <Route path="/" component={HomePage}/>
       </Switch>
       </Router>
+
       </div>
     );
   }
