@@ -25,7 +25,6 @@ class HomePage extends React.Component{
         this.setState({Login:login})
       }
       RegisterSubmit=()=>{
-        this.props.
           this.state.gotoReg=true;
           this.state.gotolog=false;
       }
@@ -42,7 +41,7 @@ class HomePage extends React.Component{
             decision=<div>
               <TextField data="User ID"/> 
               <TextField data="Password"/>
-              <button class="btn-success btn-lg" onClick = {this.LoginSubmit}>Submit</button>
+              <Link to="/LoginSuccessful">Submit</Link>
               </div>
           }
           else if(this.state.Register)
@@ -53,7 +52,7 @@ class HomePage extends React.Component{
               <TextField data = "Preferred User ID"/>
               <TextField data = "Password"/>
               <TextField data = "Confirm Password"/>
-              <button class="btn-success btn-lg" onClick={this.RegisterSubmit}>Submit</button>
+              <Link to ="/RegisterSuccessful">Submit</Link>
 
             </div>
           }

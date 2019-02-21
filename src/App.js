@@ -2,13 +2,14 @@ import React, {
   Component
 } from 'react';
 import './App.css';
-import {BrowserRouter as Router} from 'react-router-dom'
+import {BrowserRouter as Router,Link} from 'react-router-dom'
 import {Route,Switch} from 'react-router-dom'
 import loginSuccess from './components/loginSuccess/loginSuccess'
 import registerSuccess from './components/registerSuccess/registerSuccess'
 import HomePage from './components/HomePage'
 import TopNav from './shared-components/TopNav'
 import leftNav from './shared-components/leftNav'
+import Dashboard from './components/Dashboard'
 class App extends Component {
   e = "Not healthy"
   
@@ -46,6 +47,7 @@ class App extends Component {
       <Route path="/RegisterSuccessful" component={registerSuccess}/>
       <Route path="/Top" component={TopNav}/>
       <Route path="/Left" component={leftNav}/>
+      <Route path="/Dashboard" component={Dashboard}/>
       <Route path="/" component={HomePage}/>
       </Switch>
       </Router>
