@@ -1,7 +1,12 @@
 import React,{Component} from 'react'
+const navStyle={
+   height: '100vh',
+   width: '20%',
+   'align-items': 'baseline'
+}
 const LeftNav=()=>{
     return(
-        <nav class = "navbar bg-dark">
+        <nav class = "navbar bg-dark" style={navStyle}>
         <ul class="navbar-nav">
           <li class="nav-item">
              <button class="btn btn-link">General News</button>
