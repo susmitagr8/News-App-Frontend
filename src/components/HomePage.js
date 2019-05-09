@@ -10,7 +10,9 @@ class HomePage extends React.Component{
         Login : false,
         Register : false,
         gotoReg : false,
-        gotolog : false
+        gotolog : false,
+        userName: "",
+        password: ""
       }
     RegisterClick=()=>{   
         const register=true
@@ -25,7 +27,6 @@ class HomePage extends React.Component{
         this.setState({Login:login})
       }
       RegisterSubmit=()=>{
-        this.props.
           this.state.gotoReg=true;
           this.state.gotolog=false;
       }
@@ -33,17 +34,53 @@ class HomePage extends React.Component{
         this.state.gotoReg=false;
         this.state.gotolog=true;
       }
+      handleUserIdChange=(e) =>{
+        this.setState({userName: e.target.value});
+    }
+    handlePasswordChange=(e) =>{
+      this.setState({password: e.target.value});
+  }
+  submitCred = (e) => {
+    e.preventDefault()
+    fetch('http://127.0.0.1:8081/get-token', {
+      method: 'post',
+      body : JSON.stringify({
+       "userName": this.state.userName,
+       "password": this.state.password
+    })}).then((res) => {
+      debugger
+      if (!res.ok){
+        throw new Error
+      }
+      return res.json()
+  }).then((res) => {
+    debugger
+console.log(res.token)
+sessionStorage.setItem('auth', 'Bearer ' + res.token)
+sessionStorage.setItem('userName', this.state.userName)
+ this.props.history.push('/Top/Dash-Sec')
+  }).catch((err) => {
+   console.log(err)
+   alert(err)
+  })
+  }
       render() {
 
         let decision=null
         
         if(this.state.Login)
         {
-            decision=<div>
-              <TextField data="User ID"/> 
-              <TextField data="Password"/>
-              <button class="btn-success btn-lg" onClick = {this.LoginSubmit}>Submit</button>
+            decision=<form onSubmit={(e) => this.submitCred(e)}>
+              <div>
+              <h6>User Name</h6>
+              <input type="text" onChange={this.handleUserIdChange}/>
               </div>
+              <div>
+              <h6>Password</h6>
+              <input type="password" onChange={this.handlePasswordChange}/>
+              </div>
+              <button>Submit</button>
+              </form>
           }
           else if(this.state.Register)
           {
@@ -53,7 +90,7 @@ class HomePage extends React.Component{
               <TextField data = "Preferred User ID"/>
               <TextField data = "Password"/>
               <TextField data = "Confirm Password"/>
-              <button class="btn-success btn-lg" onClick={this.RegisterSubmit}>Submit</button>
+              <Link to ="/RegisterSuccessful">Submit</Link>
 
             </div>
           }

@@ -1,6 +1,8 @@
 import React,{Component} from 'react'
 import {Route,Switch} from 'react-router-dom'
 import leftNav from '../shared-components/leftNav'
+import loginSuccess from '../components/loginSuccess/loginSuccess'
+import './TopNav.css';
 const TopNav=()=>{
     return(
         <div>
@@ -9,7 +11,8 @@ const TopNav=()=>{
         <button type="button" class="btn btn-link">Favourite Content</button>
         <button type="button" class="btn btn-link">Settings</button>
         </nav>
-        <Route path="/Top/Left" component={leftNav}/>
+        <Route path="/Top/Left" class="LeftNav" component={leftNav}/>
+        <Route path="/Top/Dash-Sec" component={loginSuccess}/>
         </div>
     );
 
